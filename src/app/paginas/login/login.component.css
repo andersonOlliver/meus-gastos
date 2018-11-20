@@ -1,0 +1,14 @@
+mat-card {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+form > * {
+  width: 100%;
+}
+
+form > button{
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+}

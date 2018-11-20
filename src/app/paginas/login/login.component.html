@@ -1,0 +1,67 @@
+<mat-card>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Entrar">
+      <form #formLogin="ngForm" (submit)="logar()">
+        <!--EMAIL-->
+        <mat-form-field>
+          <input matInput placeholder="Email" type="email" name="email" [(ngModel)]="login.email"
+                 #emailLogin="ngModel" email required>
+          <mat-error *ngIf="formLogin.submitted && emailLogin.invalid && emailLogin.errors.email">
+            Entre com um endereço de e-mail válido
+          </mat-error>
+          <mat-error *ngIf="emailLogin.invalid && emailLogin.errors.required">
+            Email obrigatório
+          </mat-error>
+        </mat-form-field>
+
+
+        <!--SENHA-->
+        <mat-form-field>
+          <input matInput placeholder="Senha" type="password" name="senha" [(ngModel)]="login.senha"
+                 #senhaLogin="ngModel" [minlength]="3" [maxlength]="10" required>
+          <mat-error *ngIf="senhaLogin.invalid && senhaLogin.errors.required">
+            Senha obrigatória
+          </mat-error>
+
+        </mat-form-field>
+
+        <button mat-raised-button type="submit" color="primary">
+          Entrar
+        </button>
+      </form>
+    </mat-tab>
+
+    <mat-tab label="Cadastrar">
+      <form (ngSubmit)="cadastrar()">
+
+        <mat-form-field>
+          <span matPrefix>@</span>
+          <input matInput placeholder="Usuario" type="text" name="nome" [(ngModel)]="registro.apelido" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Email" type="email" name="email" [(ngModel)]="registro.email" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Senha" type="password" name="senha" [(ngModel)]="registro.senha" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Repita a senha" type="password" name="repitaSenha"
+                 [(ngModel)]="registro.repitaSenha" required>
+        </mat-form-field>
+
+        <button mat-raised-button type="submit" color="primary">
+          Cadastrar
+        </button>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
+
+<pre>
+  <code>
+    {{ emailLogin.errors | json }}
+  </code>
+</pre>

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
+import {AuthService} from './shared/services/auth.service';
+import {MatSidenav} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'meus-gastos';
+  @ViewChild('snav') sidenav: MatSidenav;
+
+  constructor(private authService: AuthService) {
+
+  }
+
+
+  logout(){
+    this.sidenav.close();
+    this.authService.logout();
+  }
 }

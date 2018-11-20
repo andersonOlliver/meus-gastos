@@ -1,0 +1,12 @@
+section {
+  position: absolute;
+  top: 0;
+  height: calc(100vh - 70px);
+  width: 100%;
+  background-color: rgba(255, 255, 255, .8);
+
+}
+
+mat-spinner{
+  margin: 40vh auto;
+}
