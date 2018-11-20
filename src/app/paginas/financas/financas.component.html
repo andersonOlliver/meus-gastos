@@ -1,4 +1,4 @@
-<table mat-table *ngIf="!estaCarregando" [dataSource]="lancamentos" >
+<table mat-table *ngIf="!estaCarregando && lancamentos.length > 0" [dataSource]="lancamentos" >
 
   <ng-container matColumnDef="titulo">
     <th mat-header-cell *matHeaderCellDef> Titulo</th>
@@ -47,6 +47,8 @@
   <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
   <tr mat-footer-row *matFooterRowDef="colunas"></tr>
 </table>
+
+
 
 <button class="add-button" mat-fab color="primary" (click)="adicionar()">
   <mat-icon>add</mat-icon>

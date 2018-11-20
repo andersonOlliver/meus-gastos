@@ -14,8 +14,11 @@ export class AppComponent {
 
   }
 
+  get estaLogado(): boolean {
+    return this.authService.isUserEmailLoggedIn;
+  }
 
-  logout(){
+  logout() {
     this.sidenav.close();
     this.authService.logout();
   }

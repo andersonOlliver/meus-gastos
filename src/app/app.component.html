@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="mat-elevation-z6">
+<mat-toolbar *ngIf="estaLogado" color="primary" class="mat-elevation-z6">
   <button mat-icon-button (click)="snav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
@@ -8,15 +8,24 @@
 <mat-sidenav-container>
   <mat-sidenav #snav>
     <mat-list>
-      <a mat-list-item [routerLink]="['/financas']" routerLinkActive="$router_link-active$" (click)="snav.toggle()">Lançamentos</a>
+      <a mat-list-item [routerLink]="['/']" routerLinkActive="$router_link-active$" (click)="snav.toggle()">
+        <mat-icon>home</mat-icon>
+        Inicio
+      </a>
       <mat-divider></mat-divider>
-      <a mat-list-item (click)="logout()">Sair</a>
+      <a mat-list-item [routerLink]="['/financas']" routerLinkActive="$router_link-active$" (click)="snav.toggle()">
+        <mat-icon>list</mat-icon>
+        Lançamentos
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        Sair
+      </a>
     </mat-list>
   </mat-sidenav>
 
-  <mat-sidenav-content >
-
+  <mat-sidenav-content [class.altura-completa]="!estaLogado">
     <router-outlet></router-outlet>
-
   </mat-sidenav-content>
 </mat-sidenav-container>

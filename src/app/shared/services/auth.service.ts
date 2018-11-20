@@ -17,6 +17,7 @@ export class AuthService {
   user: Observable<firebase.User>;
 
   constructor(private angularFireAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
+    this.authState = localStorage.getItem('token') === null;
     this.angularFireAuth.authState.subscribe((auth) => {
       console.log(auth);
       this.authState = auth;
@@ -46,9 +47,7 @@ export class AuthService {
   signUpWithEmail(registro: Registro) {
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(registro.email, registro.senha)
       .then((user) => {
-        console.log(user);
         this.authState = user.user;
-        console.log(registro);
         return this.criarUsuarioNoDatabase(user.user.uid, registro);
       })
       .catch(error => {
@@ -61,22 +60,21 @@ export class AuthService {
       });
   }
 
+  /**
+   * Ao criar usuário é utilizado o método update ao invés do push,
+   * pois será reutilizado o UID criado na autenticação.
+   */
   private criarUsuarioNoDatabase(uid: string, registro: Registro) {
-    let usuario = new Usuario(registro.apelido, registro.email);
+    const usuario = new Usuario(registro.apelido, registro.email);
 
-    console.log(uid);
-    console.log(usuario);
-
-    alert('Vai criar');
-    // return this.db.object<Usuario>(`/usuarios/${uid}`).update(usuario);
-    return this.db.list(`/usuarios`).update(uid, usuario)
-      .then(() => console.log('foi'))
+    return this.db.list(`/usuarios`)
+      .update(uid, usuario)
+      .then(() => console.log(`${uid} atualizado com sucesso!`))
       .catch(reason => console.log(reason));
-
   }
 
   resetPassword(email: string) {
-    var auth = firebase.auth();
+    const auth = firebase.auth();
 
     return auth.sendPasswordResetEmail(email)
       .then(() => console.log('email sent'))
