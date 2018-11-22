@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +7,14 @@ import {AuthService} from '../../shared/services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authService: AuthService) {
+  constructor() {
   }
 
   ngOnInit() {
   }
 
   get estaLogado(): boolean {
-    return this.authService.isUserEmailLoggedIn;
+    // TODO: Falta implemntar
+    throw new Error('Não implementado');
   }
 }

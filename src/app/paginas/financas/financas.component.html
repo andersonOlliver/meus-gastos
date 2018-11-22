@@ -1,26 +1,26 @@
-<table mat-table *ngIf="!estaCarregando && lancamentos.length > 0" [dataSource]="lancamentos" >
+<table mat-table [dataSource]="lancamentos" >
 
   <ng-container matColumnDef="titulo">
-    <th mat-header-cell *matHeaderCellDef> Titulo</th>
-    <td mat-cell *matCellDef="let lancamento"> {{lancamento.titulo}}</td>
+    <th mat-header-cell *matHeaderCellDef> Titulo </th>
+    <td mat-cell *matCellDef="let lancamento"> <!-- ADICIONAR VALOR AQUI --> </td>
     <td mat-footer-cell *matFooterCellDef>Total</td>
   </ng-container>
 
   <ng-container matColumnDef="valor">
-    <th mat-header-cell *matHeaderCellDef> Valor</th>
-    <td mat-cell *matCellDef="let lancamento"> {{lancamento.valor | currency: 'BRL'}}</td>
-    <td mat-footer-cell *matFooterCellDef>{{getCusto() | currency: 'BRL'}}</td>
+    <th mat-header-cell *matHeaderCellDef> Valor </th>
+    <td mat-cell *matCellDef="let lancamento"> <!-- ADICIONAR VALOR AQUI --> </td>
+    <td mat-footer-cell *matFooterCellDef> <!-- ADICIONAR VALOR AQUI --> </td>
   </ng-container>
 
   <ng-container matColumnDef="dataRegistro">
-    <th mat-header-cell *matHeaderCellDef> Data</th>
-    <td mat-cell *matCellDef="let lancamento"> {{lancamento.dataRegistro | date: 'dd/MM/yyyy'}}</td>
+    <th mat-header-cell *matHeaderCellDef> Data </th>
+    <td mat-cell *matCellDef="let lancamento"> <!-- ADICIONAR VALOR AQUI --> </td>
     <td mat-footer-cell *matFooterCellDef></td>
   </ng-container>
 
   <ng-container matColumnDef="observacao">
-    <th mat-header-cell *matHeaderCellDef> Observação</th>
-    <td mat-cell *matCellDef="let lancamento"> {{lancamento.observacao | slice:0:20}}</td>
+    <th mat-header-cell *matHeaderCellDef> Observação </th>
+    <td mat-cell *matCellDef="let lancamento"> <!-- ADICIONAR VALOR AQUI --> </td>
     <td mat-footer-cell *matFooterCellDef></td>
   </ng-container>
 
@@ -31,15 +31,6 @@
       </button>
     </th>
 
-    <td mat-cell *matCellDef="let row; let i=index;">
-      <button mat-icon-button color="primary" (click)="editar(row)">
-        <mat-icon aria-label="Edit">edit</mat-icon>
-      </button>
-
-      <button mat-icon-button color="warn" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
-        <mat-icon aria-label="Delete">delete</mat-icon>
-      </button>
-    </td>
     <td mat-footer-cell *matFooterCellDef></td>
   </ng-container>
 
@@ -48,10 +39,6 @@
   <tr mat-footer-row *matFooterRowDef="colunas"></tr>
 </table>
 
-
-
-<button class="add-button" mat-fab color="primary" (click)="adicionar()">
+<button class="add-button" mat-fab color="primary">
   <mat-icon>add</mat-icon>
 </button>
-
-<app-loading [isEnable]="estaCarregando"></app-loading>

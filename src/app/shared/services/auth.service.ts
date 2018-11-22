@@ -5,7 +5,6 @@ import {Login} from '../models/login';
 import {Registro} from '../models/registro';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs';
-import {Usuario} from '../models/usuario';
 import {AngularFireDatabase} from '@angular/fire/database';
 
 @Injectable({
@@ -17,47 +16,30 @@ export class AuthService {
   user: Observable<firebase.User>;
 
   constructor(private angularFireAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
-    this.authState = localStorage.getItem('token') === null;
-    this.angularFireAuth.authState.subscribe((auth) => {
-      console.log(auth);
-      this.authState = auth;
-    });
   }
 
   get isUserAnonymousLoggedIn(): boolean {
-    return (this.authState !== null) ? this.authState.isAnonymous : false;
+    throw new Error('Não implementado');
   }
 
   get currentUserId(): string {
-    return (this.authState) ? this.authState.uid : localStorage.getItem('token');
+    throw new Error('Não implementado');
   }
 
   get currentUserName(): string {
-    return this.authState['email'];
+    throw new Error('Não implementado');
   }
 
   get currentUser(): any {
-    return (this.authState !== null) ? this.authState : null;
+    throw new Error('Não implementado');
   }
 
   get isUserEmailLoggedIn(): boolean {
-    return ((this.authState !== null) && (!this.isUserAnonymousLoggedIn));
+    throw new Error('Não implementado');
   }
 
   signUpWithEmail(registro: Registro) {
-    return this.angularFireAuth.auth.createUserWithEmailAndPassword(registro.email, registro.senha)
-      .then((user) => {
-        this.authState = user.user;
-        return this.criarUsuarioNoDatabase(user.user.uid, registro);
-      })
-      .catch(error => {
-        console.error(error);
-        if (error.code === 'auth/invalid-email') {
-          return Promise.reject('E-mail está com formato inválido!');
-        } else if (error.code === 'auth/weak-password') {
-          return Promise.reject('Senha deverá ter no mínimo 6 caracteres!');
-        }
-      });
+    throw new Error('Não implementado');
   }
 
   /**
@@ -65,63 +47,26 @@ export class AuthService {
    * pois será reutilizado o UID criado na autenticação.
    */
   private criarUsuarioNoDatabase(uid: string, registro: Registro) {
-    const usuario = new Usuario(registro.apelido, registro.email);
-
-    return this.db.list(`/usuarios`)
-      .update(uid, usuario)
-      .then(() => console.log(`${uid} atualizado com sucesso!`))
-      .catch(reason => console.log(reason));
+    throw new Error('Não implementado');
   }
 
   resetPassword(email: string) {
-    const auth = firebase.auth();
-
-    return auth.sendPasswordResetEmail(email)
-      .then(() => console.log('email sent'))
-      .catch((error) => console.log(error));
+    throw new Error('Não implementado');
   }
 
   loginWithEmail(login: Login) {
-    return this.angularFireAuth.auth.signInWithEmailAndPassword(login.email, login.senha)
-      .then((user) => {
-        this.authState = user.user;
-        localStorage.setItem('user', JSON.stringify(user));
-      })
-      .catch(error => {
-        console.error(error);
-        throw error;
-      });
+    throw new Error('Não implementado');
   }
 
   public login(login: Login) {
-
-    return this.angularFireAuth.auth.signInWithEmailAndPassword(login.email, login.senha)
-      .then((user: firebase.auth.UserCredential) => {
-
-        console.log(user);
-        this.authState = user.user;
-        localStorage['token'] = user.user.uid;
-        this.router.navigate(['']);
-
-      })
-      .catch((error) => {
-        if (error.code === 'auth/wrong-password') {
-          return Promise.reject('Usuário ou senha inválido!');
-        } else {
-          return Promise.reject(error.toString());
-        }
-      });
-
+    throw new Error('Não implementado');
   }
 
   logout(): void {
-    this.angularFireAuth.auth.signOut();
-    localStorage.clear();
-    this.router.navigate(['/']);
+    throw new Error('Não implementado');
   }
 
   signOut(): void {
-    this.angularFireAuth.auth.signOut();
-    this.router.navigate(['/']);
+    throw new Error('Não implementado');
   }
 }

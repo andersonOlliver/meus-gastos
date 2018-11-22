@@ -9,43 +9,32 @@ import {AuthService} from './auth.service';
   providedIn: 'root'
 })
 export class LancamentosService {
-  lancamentos: AngularFireList<Lancamento>;
   private path = '/lancamentos';
 
-  constructor(private db: AngularFireDatabase, private authService: AuthService) {
-    this.lancamentos = this.db.list(this.path);
+  constructor() {
   }
 
   adicionaLancamento(lancamento: Lancamento) {
-    return this.lancamentos.push(lancamento);
+    // TODO: Implementação de regras aqui
   }
 
   listar(): Observable<Lancamento[]> {
-    return this.db.list(this.path, ref =>
-        ref.orderByChild('userId').equalTo(this.authService.currentUserId || localStorage["token"]))
-      .snapshotChanges()
-      .pipe(
-        map(changes =>
-          changes.map(l => ({key: l.payload.key, ...l.payload.val()} as Lancamento))
-        ),
-        tap(changes =>
-          changes.map(x => x.valor = parseFloat(x.valor.toString()
-            .replace(',', '.')))
-        )
-      );
+    // TODO: Implementação de regras aqui
+    throw new Error('Não implementado');
   }
 
   obterPorId(key: string): Observable<Lancamento> {
-    return this.db.object<Lancamento>(`${this.path}/${key}`).valueChanges();
+    // TODO: Implementação de regras aqui
+    throw new Error('Não implementado');
   }
 
   atualizar(id: string, lancamento: Lancamento): Promise<void> {
-    return this.db.object<Lancamento>(`${this.path}/${id}`)
-      .update(lancamento);
+    // TODO: Implementação de regras aqui
+    throw new Error('Não implementado');
   }
 
   remover(lancamento: Lancamento): Promise<void> {
-    return this.db.object<Lancamento>(`${this.path}/${lancamento.key}`)
-      .remove();
+    // TODO: Implementação de regras aqui
+    throw new Error('Não implementado');
   }
 }

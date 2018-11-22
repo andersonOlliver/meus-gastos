@@ -1,6 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
-import {AuthService} from './shared/services/auth.service';
-import {MatSidenav} from '@angular/material';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +6,17 @@ import {MatSidenav} from '@angular/material';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  @ViewChild('snav') sidenav: MatSidenav;
 
-  constructor(private authService: AuthService) {
+  constructor() {
 
   }
 
   get estaLogado(): boolean {
-    return this.authService.isUserEmailLoggedIn;
+    // TODO: Implementação de regras aqui
+    throw new Error('Não implementado');
   }
 
   logout() {
-    this.sidenav.close();
-    this.authService.logout();
+    // TODO: Implementação de regras aqui
   }
 }

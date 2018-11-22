@@ -1,36 +1,36 @@
-<form (ngSubmit)="adicionar()">
+<form>
   <mat-card>
     <mat-card-title>
-      {{ehEdicao ? 'Edita Lançamento' : 'Adiciona Lançamento'}}
+      Adiciona Lançamento
     </mat-card-title>
     <mat-card-content>
       <mat-form-field>
-        <input matInput placeholder="Título" [(ngModel)]="lancamento.titulo" name="titulo" required>
+        <input matInput placeholder="Título" name="titulo" required>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Valor" [(ngModel)]="lancamento.valor" name="valor" required>
+        <input matInput placeholder="Valor" name="valor" required>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Informe a data" [(ngModel)]="dataRegistro"
+        <input matInput [matDatepicker]="picker" placeholder="Informe a data"
                name="dataRegistro" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Observação" [(ngModel)]="lancamento.observacao" name="observacao"></textarea>
+        <textarea matInput placeholder="Observação" name="observacao"></textarea>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button type="button" (click)="voltar()" color="secondary">
+      <button mat-raised-button type="button" color="secondary">
         <mat-icon>clear</mat-icon>
         Cancelar
       </button>
       <button mat-raised-button type="submit" color="primary">
         <mat-icon>done</mat-icon>
-        {{ehEdicao? 'Atualizar': 'Adicionar'}}
+        Adicionar
       </button>
     </mat-card-actions>
   </mat-card>
